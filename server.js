@@ -6,6 +6,7 @@ import productRoute from "./Routes/ProductRoutes.js";
 import { errorHandler, notFound } from "./Middleware/Error.js";
 import userRoute from "./Routes/UserRoutes.js";
 import orderReducer from "./Routes/OrderReducer.js";
+import path from "path";
 
 dotenv.config();
 connectDatabase();
@@ -28,6 +29,11 @@ app.use(errorHandler)
 app.get("/", (req, res) => {
     res.send("Api is running.......")
 })
+
+app.get("/", (req, res) => {
+    app.use(express.static(path.resolve(__dirname, "frontend", "build")));
+    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
+});
 
 
 const PORT = process.env.PORT || 1000;

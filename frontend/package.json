@@ -1,7 +1,6 @@
 {
   "name": "node_code",
   "version": "0.1.0",
-  "proxy": "http://localhost:5000",
   "homepage": "http://Bhagyashri0411.github.io/advanced-softeware",
   "private": true,
   "dependencies": {

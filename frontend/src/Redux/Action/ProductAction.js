@@ -5,7 +5,7 @@ import { CART_ADD_ITEM, CART_CLEAR_ITEM, CART_DELETE_ITEM, CART_PAYMENT_METHOD, 
 export const listProduct = (keyword =" ", pageNumber=" ") => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_LIST_REQUEST })
-        const { data } = await axios.get(`/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
+        const { data } = await axios.get(`${window.location.origin}/api/products?keyword=${keyword}&pageNumber=${pageNumber}`);
         dispatch({ type: PRODUCT_LIST_SUCCESS, payload: data })
     } catch (error) {
         dispatch({
@@ -19,7 +19,7 @@ export const listProduct = (keyword =" ", pageNumber=" ") => async (dispatch) =>
 export const listProductDetails = (id) => async (dispatch) => {
     try {
         dispatch({ type: PRODUCT_DETAILS_REQUEST })
-        const { data } = await axios.get(`/api/products/${id}`);
+        const { data } = await axios.get(`${window.location.origin}/api/products/${id}`);
         dispatch({ type: PRODUCT_DETAILS_SUCCESS, payload: data })
     } catch (error) {
         dispatch({
@@ -42,7 +42,7 @@ export const CreateproductReviews = (productId, review) => async (dispatch, getS
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.post(`/api/products/${productId}/review`, review, config);
+        const { data } = await axios.post(`${window.location.origin}/api/products/${productId}/review`, review, config);
         dispatch({ type: PRODUCT_REVIES_CREATE_SUCCESS, payload: data })
     } catch (error) {
         const message = error.response && error.response.data.message ? error.response.data.message : error.message;
@@ -58,7 +58,7 @@ export const CreateproductReviews = (productId, review) => async (dispatch, getS
 
 // ADD TO CART
 export const addToCart = (id, qty) => async (dispatch, getState) => {
-    const { data } = await axios.get(`/api/products/${id}`)
+    const { data } = await axios.get(`${window.location.origin}/api/products/${id}`)
 
     dispatch({
         type: CART_ADD_ITEM,
@@ -111,7 +111,7 @@ export const login = (email, password) => async (dispatch) => {
                 "Content-Type": "application/json"
             }
         }
-        const { data } = await axios.post(`/api/users/login`, { email, password }, config);
+        const { data } = await axios.post(`${window.location.origin}/api/users/login`, { email, password }, config);
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
         localStorage.setItem("userInfo", JSON.stringify(data))
 
@@ -148,7 +148,7 @@ export const register = (name, email, password) => async (dispatch) => {
                 "Content-Type": "application/json"
             }
         }
-        const { data } = await axios.post(`/api/users`, { name, email, password }, config);
+        const { data } = await axios.post(`${window.location.origin}/api/users`, { name, email, password }, config);
         dispatch({ type: USER_REGISTER_SUCCESS, payload: data });
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
 
@@ -175,7 +175,7 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.get(`/api/users/${id}`, config);
+        const { data } = await axios.get(`${window.location.origin}/api/users/${id}`, config);
         dispatch({ type: USER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         const message = error.response && error.response.data.message ? error.response.data.message : error.message;
@@ -204,7 +204,7 @@ export const updateUserProfile = (user) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.put(`/api/users/profile`, user, config);
+        const { data } = await axios.put(`${window.location.origin}/api/users/profile`, user, config);
         dispatch({ type: USER_UPDATES_SUCCESS, payload: data });
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data })
 
@@ -236,7 +236,7 @@ export const createOrder = (order) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.post(`/api/orders/`, order, config);
+        const { data } = await axios.post(`${window.location.origin}/api/orders/`, order, config);
         dispatch({ type: ORDER_CREATE_SUCCESS, payload: data });
         dispatch({ type: CART_CLEAR_ITEM, payload: data })
 
@@ -267,7 +267,7 @@ export const getOrderDetails = (id) => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.get(`/api/orders/${id}`, config);
+        const { data } = await axios.get(`${window.location.origin}/api/orders/${id}`, config);
         dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
     } catch (error) {
         const message = error.response && error.response.data.message ? error.response.data.message : error.message;
@@ -296,7 +296,7 @@ export const payOrder = (orderId, paymentResult) => async (dispatch, getState) =
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.put(`/api/orders/${orderId}/pay`, paymentResult, config);
+        const { data } = await axios.put(`${window.location.origin}/api/orders/${orderId}/pay`, paymentResult, config);
         dispatch({ type: ORDER_PAY_SUCCESS, payload: data });
     } catch (error) {
         const message = error.response && error.response.data.message ? error.response.data.message : error.message;
@@ -324,7 +324,7 @@ export const listOrder = () => async (dispatch, getState) => {
                 Authorization: `Bearer ${userInfo.token}`
             }
         }
-        const { data } = await axios.get(`/api/orders/get`, config);
+        const { data } = await axios.get(`${window.location.origin}/api/orders/get`, config);
         dispatch({ type: ORDER_LIST_SUCCESS, payload: data });
     } catch (error) {
         const message = error.response && error.response.data.message ? error.response.data.message : error.message;
