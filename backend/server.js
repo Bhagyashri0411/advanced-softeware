@@ -6,12 +6,15 @@ import productRoute from "./Routes/ProductRoutes.js";
 import { errorHandler, notFound } from "./Middleware/Error.js";
 import userRoute from "./Routes/UserRoutes.js";
 import orderReducer from "./Routes/OrderReducer.js";
-import path from "path";
+import cors from 'cors'; // Import cors module
 
 dotenv.config();
 connectDatabase();
 const app = express();
 app.use(express.json())
+
+// Enable CORS
+app.use(cors());
 
 // API
 app.use("/api/import", ImportData)
@@ -29,11 +32,6 @@ app.use(errorHandler)
 app.get("/", (req, res) => {
     res.send("Api is running.......")
 })
-
-app.get("/", (req, res) => {
-    app.use(express.static(path.resolve(__dirname, "frontend", "build")));
-    res.sendFile(path.resolve(__dirname, "frontend", "build", "index.html"));
-});
 
 
 const PORT = process.env.PORT || 1000;
