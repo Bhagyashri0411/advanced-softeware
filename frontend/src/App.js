@@ -20,7 +20,7 @@ const App = () => {
   return (
     <Router>
       <Switch>
-        <Route exact component={HomeScreen} path="/" />
+        <Route exact component={HomeScreen} path="/advanced-softeware" />
         <Route exact component={HomeScreen} path="/search/:keyword" />
         <Route exact component={HomeScreen} path="/page/:pagenumber" />
         <Route exact component={HomeScreen} path="/search/:keyword/page/:pagenumber" />

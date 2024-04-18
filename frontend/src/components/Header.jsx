@@ -65,7 +65,7 @@ const Header = () => {
                         <div className="container">
                             <div className="row">
                                 <div className="col-6 d-flex align-items-center">
-                                    <Link to="/" className="navbar-brand">
+                                    <Link to="/advanced-softeware" className="navbar-brand">
                                         <img src={logo} alt="logo" />
                                     </Link>
                                 </div>
@@ -122,7 +122,7 @@ const Header = () => {
                     <div className="pc-header">
                         <div className="row">
                             <div className="col-md-3 col-4 d-flex align-items-center">
-                                <Link className="navbar-brand" to="/">
+                                <Link className="navbar-brand" to="/advanced-softeware">
                                     <img src={logo} alt="logo" />
                                 </Link>
                             </div>
